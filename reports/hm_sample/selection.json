@@ -1,0 +1,15 @@
+{
+  "selected_policy": "xgboost_classifier",
+  "selected_ranker": "xgboost_classifier",
+  "selected_depths": {
+    "logistic": 5,
+    "random_forest": 5,
+    "lightgbm_classifier": 5,
+    "xgboost_classifier": 5,
+    "xgb_pairwise": 5,
+    "xgb_ndcg": 5,
+    "lambdamart": 3
+  },
+  "criterion": "validation MAP@12",
+  "test_used_for_selection": false
+}

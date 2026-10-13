@@ -1,0 +1,31 @@
+{
+  "dataset": {
+    "dataset": "hm",
+    "source": "data/raw",
+    "seed": 20261013,
+    "source_transaction_rows": 31788324,
+    "selected_customers": 50000,
+    "selected_transactions": 1156381,
+    "articles": 105542,
+    "start": "2018-09-20",
+    "end": "2020-09-22",
+    "sampling": "stable blake2b hash of customer_id; all selected-user history retained",
+    "duplicate_transactions": "preserved: repeated rows may represent multiple units"
+  },
+  "config": "configs/hm_sample.json",
+  "python": "3.13.7",
+  "packages": {
+    "numpy": "2.3.3",
+    "pandas": "2.3.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "lightgbm": "4.7.0",
+    "pyarrow": "26.0.0"
+  },
+  "seconds": 141.92467233299976,
+  "completed": true,
+  "optional_two_tower": false,
+  "cohort": "users with a next-week purchase",
+  "all_users_ctr_not_estimated": true
+}

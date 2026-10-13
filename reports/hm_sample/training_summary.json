@@ -1,0 +1,8 @@
+{
+  "raw_rows": 1222256,
+  "sampled_rows": 31746,
+  "positive_rows": 2886,
+  "query_groups": 2208,
+  "negative_ratio": 10,
+  "zero_positive_queries": "excluded only from model training; kept in evaluation"
+}

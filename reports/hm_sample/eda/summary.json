@@ -1,0 +1,17 @@
+{
+  "transactions": 1156381,
+  "customers_in_metadata": 50000,
+  "customers_with_transactions": 49641,
+  "items_with_transactions": 72285,
+  "catalog_items": 105542,
+  "start": "2018-09-20",
+  "end": "2020-09-22",
+  "repeat_transaction_fraction": 0.14009483033706016,
+  "user_transaction_quantiles": {
+    "0.25": 3.0,
+    "0.5": 9.0,
+    "0.75": 27.0,
+    "0.9": 59.0,
+    "0.99": 188.0
+  }
+}

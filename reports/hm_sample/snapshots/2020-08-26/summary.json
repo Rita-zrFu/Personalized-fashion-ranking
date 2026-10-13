@@ -1,0 +1,15 @@
+{
+  "cutoff": "2020-08-26",
+  "history_rows": 204014,
+  "target_rows": 10249,
+  "target_users": 2893,
+  "candidates": 436259,
+  "positives_in_candidates": 957,
+  "distinct_target_pairs": 9172,
+  "repeat_target_pair_fraction": 0.03805058874836459,
+  "truly_unseen_target_item_fraction": 0.11829481029219363,
+  "ineligible_target_item_fraction": 0.13563017880505887,
+  "history_window_days": 120,
+  "candidate_catalog": "items purchased in history lookback",
+  "training_positives": "only positives found by retrieval; no future-positive injection"
+}
