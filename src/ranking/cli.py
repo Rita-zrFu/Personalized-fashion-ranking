@@ -28,6 +28,10 @@ def main():
     applied.add_argument("--config", type=Path, default=Path("configs/hm_sample.json"))
     applied.add_argument("--project-root", type=Path)
     applied.add_argument("--image-dir", type=Path, help="Optional local H&M image directory; no downloads")
+    propensity = sub.add_parser("propensity", help="Train time-aware customer purchase propensity")
+    propensity.add_argument("--config", type=Path, default=Path("configs/propensity.json"))
+    propensity.add_argument("--project-root", type=Path)
+    propensity.add_argument("--features-only", action="store_true")
     args = parser.parse_args()
     if args.command == "prepare":
         print(json.dumps(prepare(args.raw_dir, args.output, args.max_users or None, args.seed), indent=2))
@@ -46,6 +50,9 @@ def main():
     elif args.command == "applied":
         from .applied import generate_applied
         generate_applied(args.config, args.project_root, args.image_dir)
+    elif args.command == "propensity":
+        from .propensity.pipeline import run
+        run(args.config, args.project_root, args.features_only)
 
 
 if __name__ == "__main__":
