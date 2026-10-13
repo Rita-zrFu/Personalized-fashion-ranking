@@ -1,0 +1,11 @@
+{
+  "known_population": 49421,
+  "known_recommendation_buyers": 2232,
+  "new_history_recommendation_buyers": 220,
+  "propensity_groups": "ranked on all known customers before outcomes: top 20%, next 30%, remaining 50%",
+  "cold_start": "No-history buyers remain a separate unmodeled group; private scores contain a labeled prior-only placeholder",
+  "recommendation_order_unchanged": true,
+  "personalized_policy": "xgboost_classifier",
+  "selected_nonbuyers_with_new_recommendations": 2,
+  "examples_curated_after_test": true
+}

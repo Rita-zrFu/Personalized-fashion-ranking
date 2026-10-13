@@ -1,0 +1,52 @@
+{
+  "dataset": "H&M fixed 50K-customer sample",
+  "python": "3.13.7",
+  "packages": {
+    "numpy": "2.3.3",
+    "pandas": "2.3.2",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "lightgbm": "4.7.0"
+  },
+  "original_recommender_hashes": {
+    "reports/hm_sample/metrics.csv": "48ed53d9b9271cc977ca09034254b424048139a8fd1deb246f724b97f40a513c",
+    "reports/hm_sample/selection.json": "62a19e63149d5afa51eff43ac33a20709f3e953655ea9b795c213a513defe852",
+    "reports/runs/hm_sample/recommendations.csv": "52552d379a2562fd72a2c338d427cf1a751ee02c3be2395d4a3430ffa73b1c57"
+  },
+  "original_recommender_unchanged": true,
+  "selection": "validation AP only; sigmoid calibration uses validation; no train+validation refit",
+  "cohort": "known historical buyers, selected without future outcomes; future-first-time buyers excluded from propensity metrics",
+  "horizons": [
+    7,
+    14,
+    28
+  ],
+  "seconds": 41.52762716601137,
+  "primary_model": {
+    "horizon_days": 7,
+    "selected_model": "random_forest",
+    "customers": 49421,
+    "buyers": 2232,
+    "prevalence": 0.04516298739402278,
+    "roc_auc": 0.8134929044198154,
+    "pr_auc_ap": 0.20885293123323223,
+    "log_loss": 0.15304575984317476,
+    "brier": 0.039278579937723504,
+    "calibration_ece": 0.004293377426636143,
+    "mean_probability": 0.04770400560399631
+  },
+  "integration": {
+    "known_population": 49421,
+    "known_recommendation_buyers": 2232,
+    "new_history_recommendation_buyers": 220,
+    "propensity_groups": "ranked on all known customers before outcomes: top 20%, next 30%, remaining 50%",
+    "cold_start": "No-history buyers remain a separate unmodeled group; private scores contain a labeled prior-only placeholder",
+    "recommendation_order_unchanged": true,
+    "personalized_policy": "xgboost_classifier",
+    "selected_nonbuyers_with_new_recommendations": 2,
+    "examples_curated_after_test": true
+  },
+  "exact_purchase_time_estimated": false,
+  "uplift_estimated": false,
+  "completed": true
+}

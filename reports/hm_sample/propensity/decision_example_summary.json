@@ -1,0 +1,62 @@
+[
+  {
+    "alias": "A",
+    "title": "High propensity · purchase",
+    "propensity": 0.7402763230147328,
+    "propensity_segment": "high",
+    "outcome": 1,
+    "history_purchases": 471,
+    "recency_days": 1.0,
+    "typical_gap": 4.615384578704834,
+    "future_items": 3,
+    "hits": 3
+  },
+  {
+    "alias": "B",
+    "title": "High propensity · no purchase",
+    "propensity": 0.7710838871647878,
+    "propensity_segment": "high",
+    "outcome": 0,
+    "history_purchases": 308,
+    "recency_days": 1.0,
+    "typical_gap": 6.5471696853637695,
+    "future_items": 0,
+    "hits": 0
+  },
+  {
+    "alias": "C",
+    "title": "Medium propensity · purchase",
+    "propensity": 0.07112727297142805,
+    "propensity_segment": "medium",
+    "outcome": 1,
+    "history_purchases": 15,
+    "recency_days": 11.0,
+    "typical_gap": 57.16666793823242,
+    "future_items": 5,
+    "hits": 2
+  },
+  {
+    "alias": "D",
+    "title": "Low propensity · no purchase",
+    "propensity": 0.0017601562928717597,
+    "propensity_segment": "low",
+    "outcome": 0,
+    "history_purchases": 13,
+    "recency_days": 614.0,
+    "typical_gap": null,
+    "future_items": 0,
+    "hits": 0
+  },
+  {
+    "alias": "E",
+    "title": "Low propensity · purchase",
+    "propensity": 0.0023673559173783307,
+    "propensity_segment": "low",
+    "outcome": 1,
+    "history_purchases": 8,
+    "recency_days": 503.0,
+    "typical_gap": null,
+    "future_items": 6,
+    "hits": 0
+  }
+]

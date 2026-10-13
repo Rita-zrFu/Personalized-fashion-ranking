@@ -25,3 +25,9 @@ Analyze the primary difference with a customer-level confidence interval. Treat 
 Batch-compute retrieval factors and features. Fetch eligible candidates, apply the trained scorer, deduplicate, and return 12 slots. Apply inventory exclusions only with a real inventory feed. Preserve repeat purchases for the evaluated policy. Use global popularity for unknown customers or retrieval failures, and version both candidate and ranker artifacts together.
 
 This repository runs offline experiments. Production serving, live monitoring, CTR/revenue lift, and an online A/B result are not claimed.
+
+## Optional customer-prioritization experiment
+
+The new propensity model forecasts return purchases but does not estimate the effect of recommendations. A separate experiment could compare uniform versus propensity-based customer prioritization, keeping the product ranker and total recommendation/outreach capacity equal. Randomize eligible customers to strategy arms before either strategy selects recipients; evaluate all assigned customers with an intention-to-treat denominator, including those not selected for exposure.
+
+Track purchase conversion, recommendation engagement, retention and coverage alongside operational guardrails. Preserve exploration opportunities for low-propensity customers and a separately defined cold-start policy. Comparing naturally high- and low-propensity purchase rates is not evidence for this experiment. Randomized assignment/exposure and unexposed controls could later support an uplift-aware system; these data are absent from the current H&M transactions.
