@@ -1,8 +1,8 @@
 PYTHON := .venv/bin/python
 export PYTHONPATH := src
-export MPLCONFIGDIR := /tmp/ranking-matplotlib
+export MPLCONFIGDIR := .cache/matplotlib
 
-.PHONY: prepare eda run rolling publish
+.PHONY: prepare eda run rolling publish applied
 prepare:
 	$(PYTHON) -m ranking.cli prepare --max-users 50000
 eda:
@@ -13,3 +13,5 @@ rolling:
 	$(PYTHON) -m ranking.cli rolling --config configs/hm_sample.json
 publish:
 	$(PYTHON) -m ranking.cli publish
+applied:
+	$(PYTHON) -m ranking.cli applied --config configs/hm_sample.json

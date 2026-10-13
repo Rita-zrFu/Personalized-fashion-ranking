@@ -1,4 +1,5 @@
 .venv/
+.cache/
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -15,3 +16,5 @@ data/processed/*
 models/
 reports/runs/
 notebooks/.ipynb_checkpoints/
+data/images/
+reports/hm_sample/applied/private/

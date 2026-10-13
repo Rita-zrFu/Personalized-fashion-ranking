@@ -9,7 +9,7 @@
 在 GitHub 建立空仓库，建议名 `personalized-fashion-ranking`。创建时保持仓库为空，README 等文件由本地提交。将下面 URL 替换为实际仓库地址。
 
 ```bash
-cd "/Users/ritaronaldo/Library/CloudStorage/OneDrive-Emory/Internship/ranking"
+cd /path/to/Personalized-fashion-ranking
 git remote add origin https://github.com/YOUR_USERNAME/personalized-fashion-ranking.git
 ```
 
@@ -21,7 +21,7 @@ git remote add origin https://github.com/YOUR_USERNAME/personalized-fashion-rank
 git add .gitignore pyproject.toml requirements.txt requirements-lock.txt Makefile configs data/README.md data/raw/.gitkeep data/processed/.gitkeep
 git add src/ranking/__init__.py src/ranking/data.py src/ranking/metrics.py src/ranking/cli.py
 git add docs/original_proposal_zh.md docs/experiment_design.md
-git diff --cached --stat
+git --no-pager diff --cached --stat
 git commit -m "Set up H&M data preparation and temporal evaluation"
 git push -u origin main
 ```
@@ -32,7 +32,7 @@ git push -u origin main
 
 ```bash
 git add src/ranking/candidates.py src/ranking/features.py
-git diff --cached --stat
+git --no-pager diff --cached --stat
 git commit -m "Add hybrid H&M retrieval and historical ranking features"
 git push
 ```
@@ -44,7 +44,7 @@ git push
 ```bash
 git add src/ranking/models.py src/ranking/pipeline.py src/ranking/cli.py
 git add src/ranking/analysis.py src/ranking/rolling.py src/ranking/reporting.py
-git diff --cached --stat
+git --no-pager diff --cached --stat
 git commit -m "Train pointwise and learning-to-rank models on temporal snapshots"
 git push
 ```
@@ -55,7 +55,7 @@ git push
 
 ```bash
 git add reports/hm_sample notebooks docs/online_ab_test.md docs/findings_zh.md
-git diff --cached --stat
+git --no-pager diff --cached --stat
 git commit -m "Report held-out H&M ranking results and ablation analysis"
 git push
 ```
@@ -66,7 +66,7 @@ git push
 
 ```bash
 git add README.md docs/roadmap_zh.md docs/github_steps_zh.md docs/resume_bullets.md
-git diff --cached --stat
+git --no-pager diff --cached --stat
 git commit -m "Document reproducible workflow and verified resume results"
 git push
 ```

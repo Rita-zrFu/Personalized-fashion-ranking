@@ -24,6 +24,10 @@ def main():
     report = sub.add_parser("publish")
     report.add_argument("--run-dir", type=Path, default=Path("reports/runs/hm_sample"))
     report.add_argument("--output", type=Path, default=Path("reports/hm_sample"))
+    applied = sub.add_parser("applied", help="Build product-facing figures from saved H&M predictions")
+    applied.add_argument("--config", type=Path, default=Path("configs/hm_sample.json"))
+    applied.add_argument("--project-root", type=Path)
+    applied.add_argument("--image-dir", type=Path, help="Optional local H&M image directory; no downloads")
     args = parser.parse_args()
     if args.command == "prepare":
         print(json.dumps(prepare(args.raw_dir, args.output, args.max_users or None, args.seed), indent=2))
@@ -39,6 +43,9 @@ def main():
     elif args.command == "publish":
         from .reporting import publish
         publish(args.run_dir, args.output)
+    elif args.command == "applied":
+        from .applied import generate_applied
+        generate_applied(args.config, args.project_root, args.image_dir)
 
 
 if __name__ == "__main__":
