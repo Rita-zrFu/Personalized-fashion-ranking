@@ -6,7 +6,7 @@ Can a personalized two-stage policy improve purchase conversion relative to a re
 
 ## Assignment and exposure
 
-Randomize eligible customers 1:1 with a persistent customer-level assignment before their first eligible recommendation request. Control shows the same 12-slot component with decayed popularity. Treatment shows the validation-selected personalized policy. Keep layout, prices, eligibility rules, and logging identical. A zero-history customer receives segment/global popularity unless an independently validated cold-start policy is available.
+Randomize eligible customers 1:1 with a persistent customer-level assignment before their first eligible recommendation request. Control shows the same 12-slot component with recent-purchase ranking and a decayed-popularity fallback. Treatment uses hybrid candidates plus the validation-selected personalized scorer. Keep layout, prices, eligibility rules, and logging identical. The offline analysis shows worse zero-history performance for the personalized scorer, so separately specify and validate a segment/global-popularity fallback for that group before using it in a treatment policy. This fallback modification is not included in the current reported personalized offline scores.
 
 Log assignment, exposure, request timestamp, policy/model version, article IDs, positions, availability, latency, clicks, add-to-cart, purchases, revenue, and returns. Keep users in their assigned arm throughout the experiment. Use intention-to-treat analysis; report exposure and logging failures separately.
 

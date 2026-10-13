@@ -1,0 +1,28 @@
+model,product_group,recommendation_slots,share
+xgboost_classifier,Garment Upper body,14390,0.48905655247417074
+xgboost_classifier,Garment Lower body,10970,0.37282490483958675
+xgboost_classifier,Garment Full body,1816,0.061718325176726485
+xgboost_classifier,Underwear,639,0.021716965742251224
+xgboost_classifier,Unknown,481,0.016347199564980968
+xgboost_classifier,Socks & Tights,440,0.014953779227841218
+xgboost_classifier,Swimwear,300,0.010195758564437194
+xgboost_classifier,Accessories,207,0.0070350734094616636
+xgboost_classifier,Shoes,115,0.003908374116367591
+xgboost_classifier,Nightwear,65,0.0022090810222947254
+xgboost_classifier,Items,1,3.398586188145731e-05
+recent,Garment Upper body,12363,0.4201672104404568
+recent,Garment Lower body,9771,0.3320758564437194
+recent,Garment Full body,2965,0.10076808047852094
+recent,Underwear,1309,0.044487493202827626
+recent,Swimwear,1305,0.0443515497553018
+recent,Accessories,809,0.027494562262098968
+recent,Shoes,356,0.012098966829798804
+recent,Socks & Tights,239,0.008122620989668298
+recent,Nightwear,150,0.005097879282218597
+recent,Unknown,142,0.004825992387166939
+recent,Items,11,0.0003738444806960305
+recent,Bags,3,0.00010195758564437195
+recent,Cosmetic,1,3.398586188145731e-05
+popularity,Garment Upper body,14712,0.5
+popularity,Garment Lower body,12260,0.4166666666666667
+popularity,Garment Full body,2452,0.08333333333333333

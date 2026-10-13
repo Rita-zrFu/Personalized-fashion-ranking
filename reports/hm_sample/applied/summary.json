@@ -1,0 +1,76 @@
+{
+  "selected_policy": "xgboost_classifier",
+  "test_cutoff": "2020-09-16",
+  "k": 12,
+  "test_users": 2452,
+  "modeled_customers": 50000,
+  "transactions": 1156381,
+  "article_metadata": 105542,
+  "eligible_catalog_items": 23120,
+  "candidate_generators": 6,
+  "mean_candidates": 146.64274061990213,
+  "candidate_recall": 0.1250386942577465,
+  "final_map": 0.0260748167888111,
+  "recent_map": 0.0222363763540305,
+  "relative_map_improvement": 0.1726198717663301,
+  "final_recall": 0.0553021220473928,
+  "final_ndcg": 0.0386166878646529,
+  "users_with_any_hit": 268,
+  "any_hit_rate": 0.10929853181076672,
+  "matched_recommendation_slots": 309,
+  "source_run": "reports/runs/hm_sample",
+  "verification": "Recomputed all three policies and activity metrics; matched saved results to 1e-12.",
+  "selection_disclosure": "Five cases curated after observing test outcomes; not a random sample or population success estimate.",
+  "product_images_used": 0,
+  "metadata_cards_used": 82,
+  "product_image_note": "Actual local photos when available; otherwise category/name/colour metadata cards, not product photos.",
+  "popularity_definition": "Rank articles by transaction count in the prior 120-day eligible catalog; ties by article ID. Exposure is weighted by recommendation slots.",
+  "long_tail_definition": "Items ranked below the top 10% of the eligible catalog by prior transactions.",
+  "examples": [
+    {
+      "alias": "A",
+      "title": "Strong match",
+      "selection_rule": "At least two hits; at most eight future items; highest hit count then MAP.",
+      "history_purchases": 471,
+      "future_items": 3,
+      "hits": 3,
+      "map_at_k": 0.7222222222222222
+    },
+    {
+      "alias": "B",
+      "title": "Partial match",
+      "selection_rule": "One hit among at least three future items, with a match in the first six ranks.",
+      "history_purchases": 165,
+      "future_items": 3,
+      "hits": 1,
+      "map_at_k": 0.3333333333333333
+    },
+    {
+      "alias": "C",
+      "title": "Active customer · miss",
+      "selection_rule": "At least 50 prior purchases, at most six future items, and no exact match.",
+      "history_purchases": 755,
+      "future_items": 1,
+      "hits": 0,
+      "map_at_k": 0.0
+    },
+    {
+      "alias": "D",
+      "title": "Low-history match",
+      "selection_rule": "One or two prior transactions; an exact match; highest MAP.",
+      "history_purchases": 1,
+      "future_items": 1,
+      "hits": 1,
+      "map_at_k": 1.0
+    },
+    {
+      "alias": "E",
+      "title": "New customer · miss",
+      "selection_rule": "No recorded prior transactions and no exact match; at most six future items.",
+      "history_purchases": 0,
+      "future_items": 1,
+      "hits": 0,
+      "map_at_k": 0.0
+    }
+  ]
+}

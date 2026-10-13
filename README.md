@@ -4,9 +4,48 @@ A two-stage H&M fashion recommender: retrieve relevant articles, then learn a pe
 
 **Completed development experiment:** 50,000 customers, 1,156,381 actual transactions, 105,542 article metadata records. The raw CSV contains 31,788,324 transactions; model experiments use the fixed customer sample. These are offline development results, not full-dataset Kaggle scores or online business lift.
 
-## Results
+## Key Results
 
-The validation-selected **XGBoost classifier scorer** achieved test **MAP@12 = 0.02607**, versus **0.02224** for a recent-purchase recommender (**+17.3% relative**) and **0.00505** for decayed popularity. The final test week contains 2,452 purchasing customers. Every method uses the same users and target sets, including cold-start customers.
+The validation-selected **XGBoost classifier scorer** improves held-out **MAP@12 by 17.3% relative to recent-purchase ranking**. Test: September 16–22, 2020; 2,452 purchasing customers, including zero-history users. Every policy uses the same users and future-purchase targets.
+
+| Metric | Personalized XGBoost | Recent purchases | Decayed popularity |
+|---|---:|---:|---:|
+| MAP@12 | **0.02607** | 0.02224 | 0.00505 |
+| Recall@12 | **0.05530** | 0.04544 | 0.02132 |
+| NDCG@12 | **0.03862** | 0.03239 | 0.01105 |
+| Eligible-catalog coverage | **14.06%** | 34.87% | 0.052% |
+
+Six candidate generators produce **146.6 distinct candidates/customer on average**, with **12.50% candidate recall**. Broader exposure than popularity comes with less coverage than recent-purchase ranking.
+
+![End-to-end recommendation system and verified results](reports/hm_sample/applied/figures/system_overview.png)
+
+## Applied Recommendation Results
+
+### What does a customer receive?
+
+![Recent history, personalized top-12 and actual future purchases for five anonymous cases](reports/hm_sample/applied/figures/recommendation_examples.png)
+
+Five curated cases show strong and partial matches, an active-customer miss, a low-history match, and a true cold-start miss. Green borders mark **exact article-ID matches**; similar names/colours can refer to distinct articles. All 12 ranked items are shown. Local product photos are unavailable, so the cards use actual product names, categories and colour metadata; swatches are illustrative.
+
+These cases were selected after observing test outcomes. They illustrate behavior rather than population success: **268/2,452 customers (10.9%)** receive at least one exact match.
+
+### For which customers does personalization help?
+
+![MAP and Recall by prior customer activity, including baseline comparisons](reports/hm_sample/applied/figures/customer_segments.png)
+
+The 1–2-purchase group has the largest observed absolute MAP gain (**+0.01022**, only **76 users**). The >10 group improves by **+0.00494** across **1,896 users**. The 3–10 group is approximately tied on MAP, while zero-history MAP falls from **0.01055 to 0.00736**. These are descriptive results for this week; a cold-start fallback deserves a separate policy evaluation.
+
+### Does the model only expose popular products?
+
+![Eligible-catalog coverage and recommendation mix by historical item popularity](reports/hm_sample/applied/figures/catalog_exposure.png)
+
+The personalized scorer exposes **3,251 distinct articles**, versus **12** for popularity and **8,061** for recent purchases. Long-tail articles account for **13.23%** of personalized recommendation slots, versus **0%** for popularity and **28.08%** for recent purchases. Long tail here means outside the top 10% of the 23,120-item eligible catalog, ranked by purchases in the preceding 120 days.
+
+Personalization creates broader exposure than popularity, while prioritizing relevance over the broader recent-purchase mix. Coverage is a separate metric from within-list diversity and business conversion.
+
+See [generated applied findings and tables](reports/hm_sample/applied/findings.md) and [reproduction/selection details](docs/applied_results.md). The original model comparisons and ablations follow below.
+
+## Technical Model Comparison
 
 | Model | MAP@12 | Recall@12 | NDCG@12 |
 |---|---:|---:|---:|
@@ -46,7 +85,15 @@ Two training snapshots predict Aug 26–Sep 1 and Sep 2–8, 2020. Validation pr
 
 ## Run locally
 
-Run commands from this `ranking/` folder. Python 3.11+ is required. Only the three competition CSVs are needed; product images are not used.
+Run commands from this `ranking/` folder. Python 3.11+ is required. The models use three competition CSVs; optional local product photos are used only for the applied example figures.
+
+**Saved run already available?** Generate the new applied outputs without retraining:
+
+```bash
+make applied
+```
+
+For a full reproduction from the official CSVs:
 
 ```bash
 python3 -m venv .venv
@@ -57,9 +104,10 @@ make eda
 make run
 make rolling
 make publish
+make applied
 ```
 
-The existing local `.venv` is already installed and the commands above have been run against the downloaded data. `make run` took about 2.4 minutes on the local machine for this sample, excluding preparation and the additional rolling-fold analysis. Outputs with customer IDs, feature matrices and saved models stay ignored locally. `make publish` copies only selected aggregate reports/figures into the Git-visible `reports/hm_sample/` directory.
+`make run` took about 2.4 minutes on the local machine for this sample, excluding preparation and rolling-fold analysis. `make applied` reuses saved recommendations, candidate features and aggregate metrics; it verifies recomputed values against the original run and writes four figures, three aggregate tables, and findings. Private case mappings remain under ignored `reports/runs/`; public examples use anonymous A–E labels. `make publish` retains the original technical report.
 
 `configs/hm_sample.json` controls this experiment. A larger customer cohort requires rerunning preparation and rebuilding all weekly features/retrievers; do not label these 50,000-user scores as full-dataset results. Final test data should not become an iterative tuning target.
 
@@ -71,10 +119,21 @@ The existing local `.venv` is already installed and the commands above have been
 - `models.py`: seven pointwise / learning-to-rank scorers.
 - `pipeline.py`: training, validation selection, held-out test and diagnostics.
 - `analysis.py`, `rolling.py`, `reporting.py`: EDA, segments, temporal folds, aggregate reports.
+- `applied.py`, `applied_plots.py`: saved-prediction examples, activity evaluation, exposure analysis and applied figures.
 - `notebooks/`: walkthroughs for data, baselines and model interpretation.
 - `docs/`: original proposal, experiment design, execution checklist, GitHub steps, A/B proposal and three résumé bullets.
 
 Start with [the Chinese execution guide](docs/roadmap_zh.md) and [the incremental GitHub guide](docs/github_steps_zh.md).
+
+## Product and Deployment Interpretation
+
+**Proposed online A/B test — not executed.** Randomize customers persistently 1:1. Control: recent-purchase ranking with a popularity fallback. Treatment: hybrid candidate generation plus the final personalized scorer. Keep recommendation slots, layout, eligibility and tracking identical.
+
+- **Primary:** seven-day purchase conversion per assigned eligible customer.
+- **Secondary:** recommendation CTR, add-to-cart rate, and revenue per assigned customer.
+- **Guardrails:** p95/p99 serving latency, recommendation failures, unavailable items, returns, catalog coverage and diversity.
+
+A deployment could batch-compute retrieval artifacts and historical features, then retrieve, score, apply real inventory rules and return 12 distinct articles per request. Log policy version, exposure, item positions, latency and outcomes. The observed cold-start weakness motivates testing a popularity fallback for zero-history users; that modification is not part of the reported offline scores. The [detailed experiment proposal](docs/online_ab_test.md) covers assignment, follow-up and analysis. Offline purchase ranking does not establish online conversion or revenue lift.
 
 ## Interpretation
 
